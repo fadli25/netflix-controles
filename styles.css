@@ -1,0 +1,389 @@
+/* Netflix Video Controller Styles */
+#netflix-controller {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 320px;
+  background: rgba(0, 0, 0, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 10000;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+#netflix-controller.visible {
+  transform: translateX(0);
+}
+
+.controller-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(229, 9, 20, 0.1);
+}
+
+.controller-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #e50914;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.controller-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.playback-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px);
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+.volume-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.volume-controls .control-btn {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+#volumeSlider {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  outline: none;
+  appearance: none;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #e50914;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+#volumeSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #e50914;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.volume-display {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 35px;
+  text-align: right;
+}
+
+.seek-controls {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.control-btn.small {
+  width: 35px;
+  height: 32px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.speed-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.speed-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.advanced-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.buffer-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 4px;
+}
+
+.info-panel {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.info-content > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.info-content strong {
+  color: #e50914;
+  font-size: 11px;
+}
+
+.info-content span {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: monospace;
+}
+
+.speed-controls label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  min-width: 45px;
+}
+
+#speedSelect {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+#speedSelect:focus {
+  border-color: #e50914;
+}
+
+#speedSelect option {
+  background: #333;
+  color: white;
+}
+
+.progress-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#progressSlider {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  outline: none;
+  appearance: none;
+}
+
+#progressSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #e50914;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#progressSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+#progressSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #e50914;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.extra-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.extra-controls .control-btn {
+  width: 40px;
+  height: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #netflix-controller {
+    width: 280px;
+    right: 10px;
+    top: 10px;
+  }
+
+  .controller-content {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .playback-controls {
+    gap: 8px;
+  }
+
+  .control-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+}
+
+/* Animation for showing controller on page load */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#netflix-controller.initial-show {
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Hover effects for better UX */
+.playback-controls .control-btn:nth-child(1):hover {
+  background: rgba(46, 125, 50, 0.3);
+}
+
+.volume-controls .control-btn:hover {
+  background: rgba(33, 150, 243, 0.3);
+}
+
+.extra-controls .control-btn:hover {
+  background: rgba(156, 39, 176, 0.3);
+}
+
+/* Focus states for accessibility */
+.control-btn:focus,
+#speedSelect:focus,
+#volumeSlider:focus,
+#progressSlider:focus {
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.5);
+}
+
+/* Hide Netflix modal dialogs */
+.nf-modal {
+  display: none !important;
+}
+
+/* Scrollbar styling for select dropdown */
+#speedSelect::-webkit-scrollbar {
+  width: 8px;
+}
+
+#speedSelect::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#speedSelect::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+#speedSelect::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
