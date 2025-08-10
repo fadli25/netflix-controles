@@ -1,199 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Netflix Controller</title>
+    <meta charset="utf-8" />
     <style>
       body {
-        width: 300px;
-        padding: 20px;
+        width: 250px;
+        padding: 15px;
+        font-family: Arial, sans-serif;
+        background: #141414;
+        color: #ffffff;
         margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-        color: white;
       }
 
-      .header {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .logo {
-        font-size: 24px;
-        font-weight: bold;
+      h2 {
         color: #e50914;
-        margin-bottom: 8px;
-      }
-
-      .subtitle {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
+        font-size: 16px;
+        margin: 0 0 10px 0;
+        text-align: center;
       }
 
       .status {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-      }
-
-      .status.active {
-        background: rgba(76, 175, 80, 0.2);
-        border: 1px solid rgba(76, 175, 80, 0.3);
-      }
-
-      .status.inactive {
-        background: rgba(244, 67, 54, 0.2);
-        border: 1px solid rgba(244, 67, 54, 0.3);
-      }
-
-      .shortcuts {
-        margin-bottom: 20px;
-      }
-
-      .shortcuts h3 {
-        font-size: 16px;
-        margin-bottom: 12px;
-        color: #e50914;
-      }
-
-      .shortcut-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .shortcut-item:last-child {
-        border-bottom: none;
-      }
-
-      .shortcut-key {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 4px 8px;
+        background: #333;
+        padding: 10px;
         border-radius: 4px;
-        font-size: 12px;
-        font-weight: bold;
-      }
-
-      .shortcut-desc {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.8);
-      }
-
-      .toggle-btn {
-        width: 100%;
-        background: #e50914;
-        color: white;
-        border: none;
-        padding: 12px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.2s;
-      }
-
-      .toggle-btn:hover {
-        background: #b8070f;
-      }
-
-      .toggle-btn:disabled {
-        background: rgba(255, 255, 255, 0.1);
-        cursor: not-allowed;
-      }
-
-      .footer {
-        margin-top: 20px;
+        margin: 10px 0;
         text-align: center;
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .active {
+        background: #0f7b0f;
+      }
+
+      .description {
+        font-size: 11px;
+        color: #999;
+        line-height: 1.4;
+        margin-top: 10px;
+      }
+
+      .version {
+        font-size: 10px;
+        color: #666;
+        text-align: center;
+        margin-top: 15px;
       }
     </style>
   </head>
   <body>
-    <div class="header">
-      <div class="logo">Netflix Controller</div>
-      <div class="subtitle">Enhanced video controls</div>
+    <h2>Netflix Controls Enhancer</h2>
+
+    <div class="status active">✓ Extension Active</div>
+
+    <div class="description">
+      This extension automatically:
+      <br />• Hides Netflix modals (.nf-modal) <br />• Keeps player controls
+      visible <br />• Ensures controls remain accessible
     </div>
 
-    <div class="status" id="status">
-      <div id="statusText">Checking Netflix page...</div>
-    </div>
-
-    <div class="shortcuts">
-      <h3>Keyboard Shortcuts</h3>
-      <div class="shortcut-item">
-        <span class="shortcut-desc">Toggle Controls</span>
-        <span class="shortcut-key">C</span>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-desc">Play/Pause</span>
-        <span class="shortcut-key">Space</span>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-desc">Mute/Unmute</span>
-        <span class="shortcut-key">M</span>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-desc">Fullscreen</span>
-        <span class="shortcut-key">F</span>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-desc">Skip Back/Forward</span>
-        <span class="shortcut-key">← →</span>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-desc">Volume Up/Down</span>
-        <span class="shortcut-key">↑ ↓</span>
-      </div>
-    </div>
-
-    <button class="toggle-btn" id="toggleController">Show Controls</button>
-
-    <div class="footer">Click the button or press 'C' to toggle controls</div>
-
-    <script>
-      // Check if we're on Netflix
-      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        const currentTab = tabs[0];
-        const status = document.getElementById("status");
-        const statusText = document.getElementById("statusText");
-        const toggleBtn = document.getElementById("toggleController");
-
-        if (currentTab.url && currentTab.url.includes("netflix.com")) {
-          status.className = "status active";
-          statusText.textContent = "✅ Netflix detected - Controls ready!";
-          toggleBtn.disabled = false;
-
-          // Send message to content script to show controls
-          toggleBtn.addEventListener("click", function () {
-            chrome.tabs.sendMessage(currentTab.id, {
-              action: "toggleControls",
-            });
-            window.close();
-          });
-        } else {
-          status.className = "status inactive";
-          statusText.textContent = "⚠️ Please navigate to Netflix first";
-          toggleBtn.disabled = true;
-          toggleBtn.textContent = "Netflix Required";
-        }
-      });
-
-      // Add some interactive effects
-      document.querySelectorAll(".shortcut-item").forEach((item) => {
-        item.addEventListener("mouseenter", function () {
-          this.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
-        });
-
-        item.addEventListener("mouseleave", function () {
-          this.style.backgroundColor = "transparent";
-        });
-      });
-    </script>
+    <div class="version">Version 1.0</div>
   </body>
 </html>
